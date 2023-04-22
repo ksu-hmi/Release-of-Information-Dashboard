@@ -1,12 +1,14 @@
 import streamlit as st
 import pandas as pd
+import os
 
 st.set_page_config(page_title="ROI Production", page_icon=":bar_chart:")
 
 if "csv_written" not in st.session_state:
     st.session_state.csv_written = False
 
-# Define a function to save data to CSV file
+
+# Define function to save data
 def save_data(date, name, calls, voicemail, call_time, request_type, number_done, pages_sent, time_spent, cds_created, images_clouded, comment):
     data = {
         'date': [date],
@@ -23,10 +25,18 @@ def save_data(date, name, calls, voicemail, call_time, request_type, number_done
         'comment': [comment]
     }
     df = pd.DataFrame(data)
-    df.to_csv('data.csv', mode='a', index=False, header=not st.session_state.csv_written)
+    
+    # Check if CSV file already exists
+    if os.path.exists('data.csv'):
+        # Append data to existing file without header
+        df.to_csv('data.csv', mode='a', index=False, header=False)
+    else:
+        # Write headers and data to new file
+        df.to_csv('data.csv', mode='a', index=False, header=True)
 
     # Set a session state variable to True to avoid writing header row again
     st.session_state.csv_written = True
+
 
 # List of user names
 user_names = [
