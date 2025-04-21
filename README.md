@@ -25,3 +25,5 @@ This project is licensed under the MIT License. You are free to use, copy, modif
 
 # Disclaimer
 This application is provided "AS IS" and without any warranty, either express or implied. The author shall not be liable for any damages whatsoever arising out of the use of this application.
+
+# Experimenting with this code as a requirement for Sprint 1.
